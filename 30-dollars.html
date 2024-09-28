@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MikLip_YT</title>
+<link rel="icon" type="image/x-icon" href="channels4_profile.jpg">
+<style>
+    body {
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative; /* Ensure relative positioning for absolute child */
+    }
+
+    #buttonGrid {
+        display: grid;
+        grid-template-columns: repeat(10, 100px);
+        grid-gap: 10px;
+        text-align: center;
+    }
+
+    .button {
+        width: 100%;
+        height: 50px;
+        background-color: #555;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .button:hover {
+        background-color: #777;
+    }
+
+    #stopAllButton {
+        position: absolute; /* Position on top of everything */
+        top: 20px; /* Adjust top position as needed */
+        right: 20px; /* Adjust right position as needed */
+        width: 100px;
+        height: 50px;
+        background-color: red;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    #stopAllButton:hover {
+        background-color: #ff0000;
+    }
+</style>
+</head>
+<body>
+<div id="buttonGrid"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var buttonGrid = document.getElementById("buttonGrid");
+
+    // Define an array of button configurations
+    var buttons = [
+        { name: "Vine Boom", sound: "vine-boom.mp3" },
+        { name: "Taco Bell", sound: "taco-bell-bong-sfx.mp3" },
+        { name: "Twitter Wars", sound: "skeleton-smoking-meme-template-made-with-Voicemod.mp3" },
+        { name: "Bruh", sound: "movie_1.mp3" },
+        { name: "wowowow", sound: "wowowow.wav" },
+        { name: "Goofy Yawn", sound: "funny-loud-ignore-my-yawn.mp3" },
+        { name: "Samsung Notify", sound: "samsung-notification-sound-bass-boosted.mp3" },
+        { name: "Noice", sound: "-click-nice_3.mp3" },
+        { name: "Whistle", sound: "dad92716-c654-4227-9f18-afa93f414e2c.mp3" },
+        { name: "Pufferfish", sound: "aaughmp3.mp3" },
+        { name: "Bonk", sound: "bonk_BEtiM8g.mp3" },
+        { name: "Alarm", sound: "danger-alarm-meme-sound-effect-made-with-Voicemod.mp3" },
+        { name: "Windows XP", sound: "erro.mp3" },
+        { name: "Incorrect Buzz", sound: "extremely-loud-incorrect-buzzer-made-with-Voicemod.mp3" },
+        { name: "Reverb Fart", sound: "fart-with-reverb.mp3" },
+        { name: "Reload", sound: "gunreload.mp3" },
+        { name: "Mr.Krabs", sound: "mr-krabs-walking.mp3" },
+        { name: "Old Car Horn", sound: "old-car-horn.mp3" },
+        { name: "Piano Riff", sound: "piano-riff-short-made-with-Voicemod.mp3" },
+        { name: "Suspense", sound: "sound-effect-suspense-strike.mp3" },
+        { name: "Realize", sound: "wowowowow-made-with-Voicemod.mp3" },
+        { name: "FBI Open UP!", sound: "fbi-open-up_dwLhIFf.mp3" },
+        { name: "poopy", sound: "fartmeme.mp3" },
+        { name: "Directed By...", sound: "meme-de-creditos-finales.mp3" },
+        { name: "Emotional Damage", sound: "emotional-damage-meme.mp3" },
+        { name: "you say ur fine", sound: "they-ask-you-how-you-are-and-you-just-have-to-say-that-youre-fine-sound-effect_IgYM1CV.mp3" },
+        { name: "Scream", sound: "y2mate_5gbydy1.mp3" },
+        { name: "What da dog", sound: "yt1s_wU4BGg.mp3" },
+        { name: "Sad Violin", sound: "tf_nemesis.mp3" },
+        { name: "Spider Man", sound: "spiderman-meme-song.mp3" },
+        { name: "We Got Him", sound: "ladies-and-gentlemen-we-got-him-song.mp3" },
+        { name: "Punch", sound: "punch-gaming-sound-effect-hd_RzlG1GE.mp3" },
+        { name: "Sicko", sound: "the-beginning-of-sicko-mode-sound-effect-for-memes_xAcUeuI.mp3" },
+        { name: "JOJO SONG", sound: "jojos-golden-wind_kL2WElB.mp3" },
+        { name: "Explosion", sound: "explosion-meme_dTCfAHs.mp3" },
+        { name: "Mission Failed", sound: "mission-failed-well-get-em-next-time-sound-effect-zxhixnbk.mp3" },
+        { name: "Stream Sniping", sound: "ninja-stream-sniping-meme-green-screen.mp3" },
+        { name: "Toasty!", sound: "mk3-04245.mp3" },
+        { name: "I'm In Danger", sound: "im-in-danger-meme-template.mp3" },
+        { name: "WOW!", sound: "anime-wow-sound-effect-mp3cut.mp3" },
+        { name: "Hog Rider", sound: "171a8e2e-4c95-45b9-abc5-83ed81442bcf.mp3" },
+        { name: "Knocked", sound: "tmp_7901-951678082.mp3" },
+        { name: "Gangstas Paradise", sound: "gangstas-paradise-scream-sound-effect-1.mp3" },
+        { name: "The Pizza", sound: "ayo_BLluQdm.mp3" },
+        { name: "Indian", sound: "70360589-c856-4ad8-94ed-776c988776c5.mp3" },
+        { name: "Default Dance", sound: "939f1050-5855-470d-9630-5637dd080435.mp3" },
+        { name: "Sigma", sound: "musica-de-sigma-estourado.mp3" },
+        { name: "Outro Song", sound: "outro-song_oqu8zAg.mp3" },
+        { name: "Lagging", sound: "loading-lost-connection-green-screen-with-sound-effect-2_K8HORkT.mp3" },
+        { name: "Bad To The Bone", sound: "bad-to-the-bone-meme.mp3" },
+        { name: "SODA!", sound: "yt1s_qwrCPVf.mp3" },
+        { name: "ZAZAZA", sound: "Recording_5.m4a" },
+        { name: "Ye Boi", sound: "ye-boi.mp3" },
+        { name: "PLEASE!", sound: "Recording_6.m4a" },
+        { name: "Skibidi Toilet", sound: "skibidi-toilet.mp3" },
+        { name: "Fantum Tuxe", sound: "fatum-tuxe.mp3" },
+        { name: "Bomba clatt", sound: "bombaclatt.mp3" },
+        { name: "Nestle Crunch", sound: "thats-why-i-love-nestle-crunch-vine.mp3" },
+        { name: "Metal Bar 🤓", sound: "metal-pipe-earrape.mp3" },
+        { name: "GYATT!", sound: "gyatt(1).mp3" },
+        { name: "Y'all Games", sound: "null.mp3" },
+        { name: "Who Is That", sound: "acd5db48-1200-40c7-b76d-c44aa2829e97.mp3" },
+        { name: "Whistle Guy", sound: "that-one-josh-hutcherson-whistle-edit.mp3" },
+        { name: "Marcela 💀", sound: "audiomass-output (1).mp3" },
+        { name: "Mr. Bombastic", sound: "earrape-bombastic.mp3" },
+        { name: "Heheheha", sound: "hehehehaw-(earrape)-made-with-Voicemod.mp3" },
+        { name: "Laysha 💀", sound: "laugh-it-up-fortnite-battle-royale-emote-audiotrimmer.mp3" },
+        { name: "Stuka", sound: "stuka-plane.mp3" },
+        { name: "It's Me", sound: "anti-hero.mp3" },
+        { name: "I'm Bouta", sound: "imboutabust.mp3" },
+        { name: "IDK", sound: "earrape-candyland.mp3" },
+        { name: "Ultra Gay", sound: "ultra-gay.mp3" },
+        { name: "Stonks", sound: "different-variations-for-stonks-sound-effect.mp3" },
+        { name: "Got You", sound: "got-you.mp3" },
+        { name: "Soulja Joe", sound: "cotton-eye-joe-nuggets.mp3" },
+        { name: "Pumpkin!", sound: "pumpkin-meme.mp3" },
+        { name: "Pakistan!", sound: "i-will-be-pilot-pakistan-meme-audiotrimmer.mp3" },
+        { name: "Whip", sound: "whip-crack-soundbible.mp3" },
+        { name: "Record Scratch", sound: "recordscratch.wav" },
+        { name: "Umm...", sound: "Pingas.mp3" }
+    ];
+
+    var audios = []; // Array to store all audio elements
+
+    // Create buttons dynamically based on the button configurations
+    buttons.forEach(function(buttonConfig) {
+        var button = document.createElement("button");
+        button.className = "button";
+        button.innerText = buttonConfig.name;
+        button.onclick = function() {
+            var audio = new Audio(buttonConfig.sound);
+            audio.play();
+            audios.push(audio); // Add the audio element to the array
+        };
+        buttonGrid.appendChild(button);
+    });
+
+    // Create the "Stop All" button
+    var stopAllButton = document.createElement("button");
+    stopAllButton.id = "stopAllButton";
+    stopAllButton.innerText = "Stop All (2)";
+    stopAllButton.onclick = function() {
+        stopAllSounds();
+    };
+    document.body.appendChild(stopAllButton); // Append to body
+
+    // Function to stop all sounds
+    function stopAllSounds() {
+        audios.forEach(function(audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
+
+    // Event listener for key press
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "2") {
+            stopAllSounds();
+        }
+    });
+});
+</script>
+</body>
+</html>
